@@ -18,7 +18,6 @@ from textual.widgets import (
     Footer,
     Static,
     Label,
-    RichLog,
 )
 
 class Url(Static):
@@ -68,7 +67,7 @@ class TubeClipper(App):
                 title = yt.title
                 download_location = self.download_location
                 if not self.test_mode:
-                    yt.streams.get_audio_only().download(output_path= download_location, filename= f"{author} - {title}.mp4" ) 
+                    yt.streams.get_audio_only().download(output_path= download_location, filename= f"{author} - {title}.mp4".replace('/','-') ) 
                 new_entry = Url(author, title, url)
                 self.notify(f"Downloaded {author} {title}", title=title)
                 self.query_one("#history").mount(new_entry)
